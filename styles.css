@@ -1,0 +1,229 @@
+/* ── Reset & Base ──────────────────────────────── */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0f1117;
+    color: #e0e0e0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ── Header ────────────────────────────────────── */
+header {
+    text-align: center;
+    padding: 20px 20px 10px;
+    position: relative;
+    z-index: 10;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+header .subtitle {
+    margin-top: 8px;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    color: #888;
+    font-weight: 300;
+}
+
+/* ── Fullscreen blurry background ──────────────── */
+.bg-image {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(4px) brightness(0.6);
+    transform: scale(1.08);          /* hide blur edges */
+    opacity: 0;
+    transition: opacity 0.5s ease, background-image 0.3s ease;
+    pointer-events: none;
+}
+
+.bg-image.active {
+    opacity: 1;
+}
+
+/* ── Map Container ─────────────────────────────── */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    position: relative;
+}
+
+.map-container {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 20px;
+}
+
+.map-wrapper {
+    position: relative;
+    width: 280px;
+    transition: transform 2.5s ease-in-out;
+    transform-origin: 64% 6%;   /* Carthage/Ariana region on the map */
+}
+
+.map-wrapper.zoom-carthage {
+    transform: scale(12);
+}
+
+/* ── SVG Map ───────────────────────────────────── */
+.tunisia-map {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.tunisia-map .gov {
+    fill: transparent;
+    stroke: #3a3d4a;
+    stroke-width: 0.8;
+    cursor: pointer;
+    transition: fill 0.3s ease, stroke 0.3s ease, filter 0.3s ease;
+}
+
+.tunisia-map .gov:hover {
+    fill: rgba(255, 255, 255, 0.08);
+    stroke: #ffffff;
+    stroke-width: 1.2;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.25));
+}
+
+/* ── City Label ────────────────────────────────── */
+.city-label {
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.35s ease, color 0.3s ease;
+    pointer-events: none;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7);
+}
+
+.city-label.visible {
+    opacity: 1;
+}
+
+/* ── Journey Button ────────────────────────────── */
+.journey-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ccc;
+    padding: 12px 32px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: all 0.4s ease;
+}
+
+.journey-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.6);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* ── Cinematic Overlay ─────────────────────────── */
+.cinematic-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: #0f1117;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+}
+
+.cinematic-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.cinematic-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('Assets/ihec.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 1.5s ease, transform 5s ease;
+}
+
+.cinematic-bg.zoom-in {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.cinematic-bg.fade-out {
+    opacity: 0;
+    transition: opacity 1.2s ease;
+}
+
+.cinematic-text {
+    position: absolute;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+    line-height: 1.6;
+}
+
+.cinematic-text .highlight {
+    color: #5bcefa;
+    font-weight: 500;
+}
+
+.cinematic-text.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cinematic-text.hide {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details</title>
+    <link rel="stylesheet" href="project.css">
+</head>
+
+<body>
+    <header>
+        <a href="journey.html" class="back-link">&larr; Back to Journey</a>
+    </header>
+
+    <!-- Hero section with logo + title -->
+    <section class="project-hero" id="projectHero">
+        <img src="" alt="" class="project-logo" id="projectLogo">
+        <h1 class="project-title" id="projectTitle">Loading…</h1>
+        <span class="project-date" id="projectDate"></span>
+        <div class="project-tools" id="projectTools"></div>
+    </section>
+
+    <!-- Extended description -->
+    <section class="project-description" id="projectDescription">
+        <p id="projectDesc"></p>
+    </section>
+
+    <!-- Status badge -->
+    <section class="project-status-section" id="projectStatusSection">
+        <div class="status-badge" id="projectStatus"></div>
+        <a href="#" class="visit-btn" id="visitBtn" target="_blank" rel="noopener noreferrer" style="display:none;">Visit Live Website ↗</a>
+    </section>
+
+    <!-- Media gallery -->
+    <section class="project-gallery" id="projectGallery">
+        <h2 class="gallery-title">Media</h2>
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Dynamically injected -->
+        </div>
+    </section>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <button class="lightbox-prev" id="lightboxPrev">&#8249;</button>
+        <button class="lightbox-next" id="lightboxNext">&#8250;</button>
+        <div class="lightbox-content" id="lightboxContent"></div>
+    </div>
+
+    <script src="project.js"></script>
+</body>
+
+</html>
